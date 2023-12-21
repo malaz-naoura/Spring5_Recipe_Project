@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Category extends BaseEntity {
 
-    private String descriptions;
+    private String description;
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
