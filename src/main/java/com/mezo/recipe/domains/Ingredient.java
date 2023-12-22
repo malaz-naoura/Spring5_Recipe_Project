@@ -14,7 +14,7 @@ public class Ingredient extends BaseEntity{
     private Recipe recipe;
 
     @OneToOne(fetch = FetchType.EAGER)
-    Ingredient ingredient;
+    UnitOfMeasure unitOfMeasure;
 
     public String getDescription() {
         return description;
@@ -38,5 +38,13 @@ public class Ingredient extends BaseEntity{
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class Notes extends BaseEntity{
+public class Note extends BaseEntity{
 
     @OneToOne
     private Recipe recipe;

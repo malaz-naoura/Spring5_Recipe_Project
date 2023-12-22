@@ -13,8 +13,8 @@ public class Recipe extends BaseEntity {
     private Integer cookTime;
     private String source;
     private String url;
+    @Lob
     private String directions;
-
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
@@ -22,7 +22,7 @@ public class Recipe extends BaseEntity {
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Notes notes;
+    private Note note;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
     private Set<Ingredient> ingredients=new HashSet<>();
@@ -81,6 +81,14 @@ public class Recipe extends BaseEntity {
         this.directions = directions;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public Byte[] getImage() {
         return image;
     }
@@ -89,11 +97,27 @@ public class Recipe extends BaseEntity {
         this.image = image;
     }
 
-    public Notes getNotes() {
-        return notes;
+    public Note getNotes() {
+        return note;
     }
 
-    public void setNotes(Notes notes) {
-        this.notes = notes;
+    public void setNotes(Note note) {
+        this.note = note;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
