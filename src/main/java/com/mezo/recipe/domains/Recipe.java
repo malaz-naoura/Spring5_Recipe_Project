@@ -31,7 +31,7 @@ public class Recipe extends BaseEntity {
     @JoinTable(name ="MM_Recipe_Category",
      joinColumns = @JoinColumn(name="Recipe_id"),
     inverseJoinColumns = @JoinColumn(name="Category_id"))
-    private Set<Category>categories;
+    private Set<Category>categories=new HashSet<>();
 
     public String getDescription() {
         return description;
@@ -97,27 +97,22 @@ public class Recipe extends BaseEntity {
         this.image = image;
     }
 
-    public Note getNotes() {
+    public Note getNote() {
         return note;
     }
 
-    public void setNotes(Note note) {
+    public void setNote(Note note) {
+        note.setRecipe(this);
         this.note = note;
     }
 
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
+    public void addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
 
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void addCategory(Category category) {
+        this.categories.add(category);
     }
 }

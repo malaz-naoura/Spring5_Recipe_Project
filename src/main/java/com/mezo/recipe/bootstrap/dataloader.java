@@ -26,10 +26,12 @@ public class dataloader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
        UnitOfMeasure teaspoon= unitOfMeasureRepo.findByDescription("Teaspoon").get();
+       Category amricanCategory=categoryRepo.findByDescription("American").get();
 
         Recipe spicyGrilledChickenTacos=new Recipe();
         spicyGrilledChickenTacos.setCookTime(15);
         spicyGrilledChickenTacos.setPrepTime(20);
+        spicyGrilledChickenTacos.addCategory(amricanCategory);
         spicyGrilledChickenTacos.setDifficulty(Difficulty.EASY);
         spicyGrilledChickenTacos.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
         spicyGrilledChickenTacos.setDescription("Spicy grilled chicken tacos! Quick marinade, then grill. Ready in about 30 minutes. Great for a quick weeknight dinner, backyard cookouts, and tailgate parties.");
@@ -46,15 +48,13 @@ public class dataloader implements CommandLineRunner {
         cumin.setDescription("cumin");
         cumin.setAmount(BigDecimal.valueOf(1));
         cumin.setUnitOfMeasure(teaspoon);
-        cumin.setRecipe(spicyGrilledChickenTacos);
 
         // Notes
         Note note=new Note();
         note.setRecipeNotes("NUTRITION FACTS (PER SERVING) 655 CALORIES 44g FAT 32g CARBS 41g PROTEINs");
-        note.setRecipe(spicyGrilledChickenTacos);
 
-        spicyGrilledChickenTacos.getIngredients().add(cumin);
-        spicyGrilledChickenTacos.setNotes(note);
+        spicyGrilledChickenTacos.addIngredient(cumin);
+        spicyGrilledChickenTacos.setNote(note);
 
         recipeRepo.save(spicyGrilledChickenTacos);
 
