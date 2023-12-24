@@ -4,11 +4,14 @@ import com.mezo.recipe.domains.*;
 import com.mezo.recipe.repositories.CategoryRepo;
 import com.mezo.recipe.repositories.RecipeRepo;
 import com.mezo.recipe.repositories.UnitOfMeasureRepo;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Component
 public class dataloader implements CommandLineRunner {
 
@@ -22,11 +25,16 @@ public class dataloader implements CommandLineRunner {
         this.recipeRepo = recipeRepo;
     }
 
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
+        loadData();
+        log.debug("Data is loaded");
+    }
 
-       UnitOfMeasure teaspoon= unitOfMeasureRepo.findByDescription("Teaspoon").get();
-       Category amricanCategory=categoryRepo.findByDescription("American").get();
+    void loadData(){
+        UnitOfMeasure teaspoon= unitOfMeasureRepo.findByDescription("Teaspoon").get();
+        Category amricanCategory=categoryRepo.findByDescription("American").get();
 
         Recipe spicyGrilledChickenTacos=new Recipe();
         spicyGrilledChickenTacos.setCookTime(15);
@@ -57,6 +65,5 @@ public class dataloader implements CommandLineRunner {
         spicyGrilledChickenTacos.setNote(note);
 
         recipeRepo.save(spicyGrilledChickenTacos);
-
     }
 }
