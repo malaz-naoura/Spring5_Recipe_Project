@@ -1,12 +1,16 @@
 package com.mezo.recipe.services;
 
 import com.mezo.recipe.repositories.RecipeRepo;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 class RecipeServiceImplTest {
+
+    AutoCloseable autoCloseable;
 
     RecipeServiceImpl recipeService;
 
@@ -16,7 +20,7 @@ class RecipeServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        autoCloseable= MockitoAnnotations.openMocks(this);
 
     }
 
@@ -32,6 +36,10 @@ class RecipeServiceImplTest {
 //        System.out.println(recipes.size());
 //        assertEquals(recipes.size(),1);
 
-
     }
+    @AfterEach
+    void tearDown() throws Exception {
+        autoCloseable.close();
+    }
+
 }
